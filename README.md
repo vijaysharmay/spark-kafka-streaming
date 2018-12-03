@@ -6,6 +6,6 @@ This repo aims to be a reference for both Scala & Python developers.
 
 Built using:
 
-Python 3.7 / Scala 2.12
-Kafka 2.1.0
-Spark 2.4.0
+- Python 3.7 / Scala 2.12
+- Kafka 2.1.0
+- Spark 2.4.0
