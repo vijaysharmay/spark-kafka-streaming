@@ -2,14 +2,15 @@ package com.streaming
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
+
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import scala.concurrent.ExecutionContextExecutor
 
+import com.streaming.streams.Publisher
 
 object Server extends App with LazyLogging{
 
@@ -22,9 +23,10 @@ object Server extends App with LazyLogging{
   val port = config.getInt("http.port")
 
   val route =
-    path("hello") {
+    path("track") {
       get {
-        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
+        val stream = Publisher.publish_tweet_to_topic("#NavyDay")
+        complete("Done")
       }
     }
 

@@ -1,5 +1,8 @@
 target/*
 project/target/*
+project/project/*
 .idea
 *.iml
 *.log
+
+src/main/resources/twitter.conf
