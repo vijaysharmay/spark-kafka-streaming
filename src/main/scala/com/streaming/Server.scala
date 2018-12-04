@@ -10,7 +10,7 @@ import com.typesafe.scalalogging.LazyLogging
 
 import scala.concurrent.ExecutionContextExecutor
 
-import com.streaming.streams.Publisher
+import com.streaming.streams.TwClient
 
 object Server extends App with LazyLogging{
 
@@ -25,7 +25,7 @@ object Server extends App with LazyLogging{
   val route =
     path("track") {
       get {
-        val stream = Publisher.publish_tweet_to_topic("#NavyDay")
+        val stream = TwClient.track("#NavyDay")
         complete("Done")
       }
     }

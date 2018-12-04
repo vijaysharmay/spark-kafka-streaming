@@ -15,8 +15,10 @@ libraryDependencies ++= Seq(
   "com.typesafe.scala-logging" %% "scala-logging"         % "3.9.0",
   "com.danielasfregola"        %% "twitter4s"             % "5.5",
   "com.lightbend"              %% "kafka-streams-scala"   % "0.2.1",
-  "org.apache.kafka"           %% "kafka"                 % "2.1.0",
   "org.apache.kafka"            % "kafka-clients"         % "2.1.0",
+  "org.apache.spark"           %% "spark-core"            % "2.4.0",
+  "org.apache.spark"           %% "spark-streaming"       % "2.4.0",
+  "org.apache.spark"           %% "spark-mllib"           % "2.4.0",
 )
 
 assemblyJarName in assembly := "spark-kafka-streaming.jar"

@@ -4,7 +4,7 @@ import com.danielasfregola.twitter4s.TwitterStreamingClient
 import com.danielasfregola.twitter4s.entities.{AccessToken, ConsumerToken, Tweet}
 import com.typesafe.config.{Config, ConfigFactory}
 
-object Publisher {
+object TwClient {
 
   private val config: Config = ConfigFactory.load()
 
@@ -19,9 +19,10 @@ object Publisher {
 
   private val streamingClient = TwitterStreamingClient(consumerToken, accessToken)
 
-  def publish_tweet_to_topic(keyword: String): Unit ={
+  // Must implement using Akka actors
+  def track(keyword: String): Unit ={
     streamingClient.filterStatuses(tracks = Seq(keyword)){
-      case tweet: Tweet => println(tweet)
+      case tweet: Tweet => KProducer.push_tweet_to_topic(keyword, tweet)
     }
   }
 
