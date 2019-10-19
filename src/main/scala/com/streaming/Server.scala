@@ -25,8 +25,10 @@ object Server extends App with LazyLogging{
   val route =
     path("track") {
       get {
-        val stream = TwClient.track("#NavyDay")
-        complete("Done")
+        parameters('hashtag.as[String]) { hashtag =>
+          val stream = TwClient.track(s"#$hashtag")
+          complete("Done")
+        }
       }
     }
 

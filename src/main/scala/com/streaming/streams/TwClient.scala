@@ -20,7 +20,8 @@ object TwClient {
   private val streamingClient = TwitterStreamingClient(consumerToken, accessToken)
 
   // Must implement using Akka actors
-  def track(keyword: String): Unit ={
+  def track(keyword: String): Unit = {
+    KProducer.create_topic_if_not_exists(keyword.replace("#", ""))
     streamingClient.filterStatuses(tracks = Seq(keyword)){
       case tweet: Tweet => KProducer.push_tweet_to_topic(keyword, tweet)
     }
