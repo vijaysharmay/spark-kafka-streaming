@@ -23,7 +23,7 @@ object TwClient {
   def track(keyword: String): Unit = {
     KProducer.create_topic_if_not_exists(keyword.replace("#", ""))
     streamingClient.filterStatuses(tracks = Seq(keyword)){
-      case tweet: Tweet => KProducer.push_tweet_to_topic(keyword, tweet)
+      case tweet: Tweet => KProducer.push_tweet_to_topic(keyword.replace("#", ""), tweet)
     }
   }
 

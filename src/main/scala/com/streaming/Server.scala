@@ -11,8 +11,9 @@ import com.typesafe.scalalogging.LazyLogging
 import scala.concurrent.ExecutionContextExecutor
 
 import com.streaming.streams.TwClient
+import com.streaming.streams.SConsumer
 
-object Server extends App with LazyLogging{
+object Server extends App with LazyLogging {
 
   implicit val system: ActorSystem = ActorSystem("spark-kafka-streaming")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
@@ -33,6 +34,7 @@ object Server extends App with LazyLogging{
     }
 
   Http().bindAndHandle(handler = route, interface = host, port = port) map { binding =>
+    SConsumer.consumeStream("HeavyRain")
     logger.info(s"REST interface bound to ${binding.localAddress}") } recover { case ex =>
     logger.info(s"REST interface could not bind to $host:$port", ex.getMessage)
   }
